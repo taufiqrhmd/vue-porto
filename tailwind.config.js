@@ -38,7 +38,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
+        heading: ['Exo 2', 'sans-serif'],
         sciFi: ['Orbitron', 'sans-serif'],
       }
     },

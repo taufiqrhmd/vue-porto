@@ -1,0 +1,98 @@
+.galaxy-outline-moving {
+  position: relative;
+  overflow: hidden;
+}
+
+.galaxy-outline-moving::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.75rem;
+  padding: 1.5px; /* tebal outline */
+  background: linear-gradient(45deg, #4fc3f7, #6a5acd, #c77dff, #070812);
+  background-size: 400% 400%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: moveGradient 5s linear infinite;
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* src/assets/styles/profile-effects.css */
+.profile-circle {
+  position: relative;
+  width: 16rem;
+  height: 16rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .profile-circle {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+.profile-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg,
+    theme('colors.galaxy-cyan / 30%'),
+    theme('colors.galaxy-purple / 25%'),
+    theme('colors.galaxy-magenta / 20%'));
+  filter: blur(40px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.profile-circle::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg,
+    theme('colors.galaxy-cyan'),
+    theme('colors.galaxy-blue'),
+    theme('colors.galaxy-purple'),
+    theme('colors.galaxy-magenta'),
+    theme('colors.galaxy-cyan'));
+  z-index: -2;
+  animation: rotate 10s linear infinite;
+}
+
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9999px;
+  border: 1px solid theme('colors.galaxy-text / 10%');
+  box-shadow: 0 8px 32px rgba(10, 16, 44, 0.5);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.profile-circle:hover img {
+  transform: scale(1.05) rotate(2deg);
+  filter: brightness(1.15) saturate(1.1);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}

@@ -1,7 +1,24 @@
-import './assets/main.css'   // ← pastikan jalur ini benar
+import './assets/main.css'
 
 import { createApp } from 'vue'
-import './assets/main.css' 
 import App from './App.vue'
 
-createApp(App).mount('#app')
+// 🔹 Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// Ikon yang dibutuhkan
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons' // ✅ `faLinkedinIn`, bukan `faLinkedin`
+
+// Daftarkan ikon ke library
+library.add(faDownload, faGithub, faLinkedinIn)
+
+// 🔹 Buat instance app DULU
+const app = createApp(App)
+
+// 🔹 Baru daftarkan komponen global
+app.component('font-awesome-icon', FontAwesomeIcon)
+
+// 🔹 Baru mount
+app.mount('#app')
