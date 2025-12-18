@@ -1,7 +1,7 @@
 <template>
   <header class="fixed top-5 left-10 right-10 z-50 bg-transparent font-sciFi backdrop-blur-sm px-4 md:px-8 py-2 rounded-lg text-white">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-      <div class="text-xl font-bold pl-10">
+      <div class="text-xl font-bold">
         Taufiq
       </div>
 

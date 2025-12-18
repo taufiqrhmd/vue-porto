@@ -8,7 +8,7 @@
     >
       <div class="absolute inset-0 bg-galaxy-darker/80"></div>
 
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 py-10 px-6 md:px-12 lg:px-20 xl:px-32 w-full">
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 py-10 px-6 md:px-12 lg:px-18 xl:px-24 w-full">
         <div class="text-left max-w-2xl">
           <h1 class="text-3xl font-heading tracking-wide font-extrabold md:text-5xl bg-clip-text text-galaxy-text">
             Hello, <span class="bg-clip-text text-transparent bg-gradient-to-r from-glow-end to-glow-start">it's me</span>
@@ -43,12 +43,11 @@
         </div>
       </div>
     </div>
-
-    <div class="galaxy-outline-moving relative -mt-10 mb-10 z-10 mx-4 md:mx-10 rounded-xl bg-galaxy-bg p-6 pb-10">
+    
+    <div class="relative -mt-10 mb-10 mx-5 md:mx-24 rounded-xl p-6 pb-10">
       <ProfileSection />
     </div>
 
-    <SkillSection />
   </div>
 </template>
 
@@ -57,7 +56,6 @@ import '@/assets/styles.css'
 import bgImage from '@/assets/images/bg-milkyway.jpg'
 import Topbar from '@/layout/Topbar.vue'
 import ProfileSection from '@/views/ProfileSection.vue'
-import SkillSection from '@/views/SkillSection.vue'
 import Button from '@/components/ui/Button.vue'
 
 import { useTypingAnimation } from '@/components/composables/useTypingAnimation'
@@ -77,4 +75,11 @@ const hoverSound = useHoverSound('/src/assets/images/Sound.mp3', 0.3)
 // External links (cleaned)
 const githubLink = 'https://github.com/taufiqrhmd'
 const linkedinLink = 'https://linkedin.com/in/mohamad-taufiq-rahmadi'
+
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // opsional: scroll ke atas
+  }
+});
 </script>
