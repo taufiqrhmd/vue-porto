@@ -1,6 +1,6 @@
 <template>
   <section id="profil"
-    class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 py-8 md:py-12 px-4 md:px-10 relative overflow-hidden">
+    class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 py-8 md:py-12 px-4 md:px-10 relative overflow-hidden pb-10">
     <div class="flex flex-col md:flex-col items-start gap-6 md:gap-8 max-w-7xl mx-auto">
       <div class="flex-shrink-0 w-full md:w-full">
         <h1
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <div class="flex-1 min-w-0 space-y-6 font-sans font-normal">
+        <div class="flex-1 min-w-0 space-y-6 font-sans font-light">
           <blockquote class="text-md md:text-lg text-galaxy-text leading-relaxed font-medium text-justify">
             {{ desc }}
           </blockquote>

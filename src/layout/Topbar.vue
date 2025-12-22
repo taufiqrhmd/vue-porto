@@ -6,10 +6,9 @@
       </div>
 
       <nav class="hidden md:flex space-x-8">
-        <a href="#profil" class="hover:text-indigo-300 transition-colors">Profil</a>
-        <a href="#skill" class="hover:text-indigo-300 transition-colors">Skill</a>
-        <a href="#project" class="hover:text-indigo-300 transition-colors">Proyek</a>
-        <a href="#contact" class="hover:text-indigo-300 transition-colors">Kontak</a>
+        <a href="#profil" class="hover:text-indigo-300 transition-colors">About</a>
+        <a href="#projects" class="hover:text-indigo-300 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-indigo-300 transition-colors">Contact</a>
       </nav>
 
       <button class="md:hidden text-gray-400 hover:text-white focus:outline-none" @click="toggleMobileMenu">
@@ -22,14 +21,11 @@
         <a href="#profil" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
           Profil
         </a>
-        <a href="#skill" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
-          Skill
-        </a>
-        <a href="#project" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
-          Proyek
+        <a href="#projects" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
+          Projects
         </a>
         <a href="#contact" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
-          Kontak
+          Contact
         </a>
       </div>
     </div>
