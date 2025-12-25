@@ -1,4 +1,3 @@
-<!-- src/components/UI/Button.vue -->
 <template>
   <button
     :class="[
@@ -60,7 +59,7 @@ const sizeClasses = {
 
 const colorClasses = {
   galaxy: 'bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-700 text-galaxy-text font-semibold shadow-lg hover:from-blue-600 hover:via-indigo-500 hover:to-purple-600 hover:shadow-xl focus:ring-galaxy-glow/50',
-  outline: 'border-2 border-galaxy-accent/70 text-galaxy-text bg-transparent hover:bg-gradient-to-r hover:from-galaxy-purple hover:to-nebula-soft focus:ring-galaxy-accent/40',
+  outline: 'border-2 border-indigo-500/70 text-galaxy-text bg-transparent hover:bg-gradient-to-r hover:from-indigo-500 hover:to-glow-mid focus:ring-galaxy-accent/40',
 //   ghost: 'text-galaxy-text bg-transparent hover:bg-galaxy-bg/20 focus:ring-galaxy-glow/30',
 //   success: 'bg-emerald-600 text-white hover:bg-emerald-500 focus:ring-emerald-500/50',
 //   danger: 'bg-rose-700 text-white hover:bg-rose-600 focus:ring-rose-500/50',

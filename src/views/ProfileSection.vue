@@ -1,11 +1,11 @@
 <template>
-  <section id="profil"
-    class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 py-8 md:py-12 px-4 md:px-10 relative overflow-hidden pb-10">
+  <section 
+    class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 py-8 md:py-12 px-4 md:px-10 relative overflow-hidden">
     <div class="flex flex-col md:flex-col items-start gap-6 md:gap-8 max-w-7xl mx-auto">
       <div class="flex-shrink-0 w-full md:w-full">
         <h1
-          class="text-3xl md:text-6xl lg:text-7xl font-title font-bold italic bg-gradient-to-r from-galaxy-text-muted via-indigo-500 to-galaxy-magenta bg-clip-text text-transparent tracking-tighter leading-none">
-          / ABOUT
+          class="text-3xl md:text-6xl lg:text-7xl font-title italic bg-gradient-to-r from-glow-start to-glow-end bg-clip-text text-transparent tracking-tighter leading-none">
+          / About
         </h1>
       </div>
 

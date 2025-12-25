@@ -3,7 +3,6 @@
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <div class="bg-galaxy-darker">
-
         <div class="relative w-full h-screen flex items-center justify-center"
           :style="{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover' }">
           <div class="absolute inset-0 bg-galaxy-darker/80"></div>
@@ -45,12 +44,17 @@
           </div>
         </div>
 
-        <div class="relative -mt-10 mb-10 mx-5 md:mx-24 rounded-xl p-6 pb-20">
+        <div id="profil" class="relative -mt-10 mb-10 mx-5 md:mx-24 rounded-xl p-6 pb-10">
           <ProfileSection />
         </div>
 
         <TechShowcase />
         <ProjectsSection />
+
+        <div class="relative h-screen bg-white">
+
+        </div>
+
 
       </div>
     </div>
@@ -90,7 +94,7 @@ onMounted(() => {
     const fontsLoaded = document.fonts ? document.fonts.ready : Promise.resolve()
 
     const bgImg = new Image()
-    bgImg.src = bgImage 
+    bgImg.src = bgImage
     const imageLoaded = new Promise((resolve) => {
       if (bgImg.complete && bgImg.naturalHeight !== 0) {
         resolve()
@@ -112,7 +116,7 @@ onMounted(() => {
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
       content: '#smooth-content',
-      smooth: 1.1,
+      smooth: 2,
       effects: true,
       smoothTouch: 0.1,
       normalizeScroll: true,
@@ -184,4 +188,3 @@ const hoverSound = useHoverSound('/src/assets/images/Sound.mp3', 0.3)
 const githubLink = 'https://github.com/taufiqrhmd'
 const linkedinLink = 'https://linkedin.com/in/mohamad-taufiq-rahmadi'
 </script>
-
