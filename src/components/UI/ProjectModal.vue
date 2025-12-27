@@ -1,7 +1,6 @@
 <template>
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm"
-        @click.stop>
-        <div class="bg-gray-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-gray-700 shadow-2xl relative"
+    <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm" @click.stop>
+        <div class="bg-gray-800 w-full max-w-3xl h-[80vh] overflow-hidden rounded-3xl border border-gray-700 shadow-2xl relative"
             role="dialog" aria-modal="true">
             <button @click="$emit('close')"
                 class="absolute top-5 right-5 text-gray-400 hover:text-white transition-colors z-10">
@@ -36,9 +35,12 @@
 
                 <div class="border-t border-gray-700 pt-6">
                     <h4 class="text-blue-400 uppercase text-xs font-black tracking-widest mb-3">Project Description</h4>
-                    <p class="text-gray-300 leading-relaxed text-lg">
-                        {{ details.description }}
-                    </p>
+                    <div class="text-gray-300 leading-relaxed text-lg max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent"
+                        style="scrollbar-gutter: stable">
+                        <div class="whitespace-pre-line">
+                            {{ details.description }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,3 +54,25 @@ defineProps({
 });
 defineEmits(['close']);
 </script>
+
+<style scoped>
+.scrollbar-thin {
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #4b5563 transparent;
+    /* thumb & track color */
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 999px;
+}
+</style>

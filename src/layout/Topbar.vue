@@ -8,6 +8,7 @@
       <nav class="hidden md:flex space-x-8">
         <a href="#profil" class="hover:text-indigo-300 transition-colors">About</a>
         <a href="#projects" class="hover:text-indigo-300 transition-colors">Projects</a>
+        <a href="#experience" class="hover:text-indigo-300 transition-colors">Experience</a>
         <a href="#contact" class="hover:text-indigo-300 transition-colors">Contact</a>
       </nav>
 
@@ -23,6 +24,9 @@
         </a>
         <a href="#projects" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
           Projects
+        </a>
+        <a href="#experience" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
+          Experience
         </a>
         <a href="#contact" class="py-2 hover:text-indigo-300 transition-colors" @click="closeMobileMenu">
           Contact

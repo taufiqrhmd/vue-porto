@@ -23,10 +23,10 @@
               <h3 class="text-3xl font-bold mb-3">{{ project.title }}</h3>
               <p class="text-sm mb-5 text-gray-300 max-w-md">{{ project.subtitle }}</p>
 
-              <button @click="openDetail(project)"
-                class="px-6 py-2 bg-white text-black rounded-full font-bold hover:bg-blue-400 transition-colors">
+              <Button color="galaxy" size="md" @click="openDetail(project)"
+                class="px-6 py-2 text-black rounded-full font-bold transition-colors">
                 View Details
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -46,6 +46,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import ProjectModal from '@/components/ui/ProjectModal.vue';
+import Button from '@/components/ui/Button.vue';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -66,7 +67,7 @@ onUnmounted(() => {
 const getSupabaseData = async () => {
   try {
     const { data, error } = await supabase
-      .from('Projects')
+      .from('projects')
       .select('*')
       .order('id', { ascending: true });
 
@@ -83,18 +84,14 @@ const getSupabaseData = async () => {
 const openDetail = async (project) => {
   const smoother = ScrollSmoother.get();
   
-  // 1. Kunci posisi SEKARANG juga (sebelum fetch atau modal muncul)
   if (smoother) {
-    // Simpan posisi tepatnya
     const scrollPos = smoother.scrollTop();
     smoother.paused(true);
-    // Simpan ke memory agar bisa dipaksa balik ke sini jika melompat
     document.body.setAttribute('data-last-pos', scrollPos);
   }
 
-  // 2. Baru lakukan Fetch Supabase
   const { data, error } = await supabase
-    .from('Project_Details')
+    .from('project_details')
     .select('*')
     .eq('project_id', project.id)
     .single();
@@ -105,7 +102,6 @@ const openDetail = async (project) => {
     showModal.value = true;
     document.body.style.overflow = 'hidden';
   } else {
-    // Jika error, lepas kembali pause-nya
     if (smoother) smoother.paused(false);
   }
 };
@@ -118,13 +114,9 @@ const closeModal = async () => {
   const lastPos = document.body.getAttribute('data-last-pos');
 
   if (smoother) {
-    // Kembalikan ke posisi yang tepat sebelum resume
     if (lastPos) smoother.scrollTop(parseInt(lastPos));
     
-    // Resume smoother
     smoother.paused(false);
-    
-    // Refresh HANYA ScrollTrigger ini agar tidak lompat ke awal halaman
     ScrollTrigger.refresh();
   }
   

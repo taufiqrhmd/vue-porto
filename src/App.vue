@@ -7,8 +7,7 @@
           :style="{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover' }">
           <div class="absolute inset-0 bg-galaxy-darker/80"></div>
 
-          <div
-            class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 py-10 px-6 md:px-12 lg:px-18 xl:px-24 w-full">
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 py-10 px-6 md:px-12 lg:px-18 xl:px-24 w-full">
             <div class="text-left max-w-2xl">
               <h1 class="text-3xl font-heading tracking-wide font-extrabold md:text-5xl bg-clip-text text-galaxy-text">
                 Hello, <span class="bg-clip-text text-transparent bg-gradient-to-r from-glow-end to-glow-start">it's
@@ -50,11 +49,11 @@
 
         <TechShowcase />
         <ProjectsSection />
+        <ExperienceSection />
 
-        <div class="relative h-screen bg-white">
+        <div class="h-screen bg-white">
 
         </div>
-
 
       </div>
     </div>
@@ -68,6 +67,7 @@ import ProfileSection from '@/views/ProfileSection.vue'
 import TechShowcase from '@/views/TechShowcase.vue'
 import ProjectsSection from '@/views/ProjectsSection.vue'
 import Button from '@/components/ui/Button.vue'
+import ExperienceSection from '@/views/ExperienceSection.vue'
 
 import { useTypingAnimation } from '@/components/composables/useTypingAnimation'
 import { useHoverSound } from '@/components/composables/useHoverSound'
