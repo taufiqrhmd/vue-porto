@@ -46,7 +46,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import ProjectModal from '@/components/ui/ProjectModal.vue';
-import Button from '@/components/ui/Button.vue';
+import Button from '@/components/ui/ButtonTemp.vue';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 

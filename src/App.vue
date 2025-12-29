@@ -63,7 +63,7 @@ import Topbar from '@/layout/Topbar.vue'
 import ProfileSection from '@/views/ProfileSection.vue'
 import TechShowcase from '@/views/TechShowcase.vue'
 import ProjectsSection from '@/views/ProjectsSection.vue'
-import Button from '@/components/ui/Button.vue'
+import Button from '@/components/ui/ButtonTemp.vue'
 import ExperienceSection from '@/views/ExperienceSection.vue'
 import ContactSection from '@/views/ContactSection.vue'
 
