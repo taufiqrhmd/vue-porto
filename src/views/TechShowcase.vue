@@ -1,7 +1,6 @@
 <template>
   <section class="py-16 px-4">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-      <!-- Kiri: Judul & Penjelasan -->
       <div class="md:w-1/2 space-y-4 pl-6">
         <h2 class="text-3xl md:text-4xl font-bold text-galaxy-blue">
           {{ displayContent.title }}
@@ -17,9 +16,7 @@
           @mouseenter="onHover(tech)" @mouseleave="onLeave">
           <img :src="tech.icon" :alt="tech.name" class="w-12 h-12 object-contain transition-all duration-300 ease-out"
             :class="{
-              // Idle: abu-abu, sedikit kecil, flat
               'grayscale opacity-50 scale-100': hoveredTechId !== tech.id,
-              // Hover: full color, sedikit lebih besar & naik sedikit
               'grayscale-0 opacity-100 scale-110 -translate-y-1': hoveredTechId === tech.id,
             }" style="
               backface-visibility: hidden;

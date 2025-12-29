@@ -49,8 +49,8 @@
 
 <script setup>
 defineProps({
-    project: Object,  // Dari table Projects
-    details: Object   // Dari table Project_Details (berisi role, description, tech_stack)
+    project: Object,  
+    details: Object  
 });
 defineEmits(['close']);
 </script>
@@ -58,9 +58,7 @@ defineEmits(['close']);
 <style scoped>
 .scrollbar-thin {
     scrollbar-width: thin;
-    /* Firefox */
     scrollbar-color: #4b5563 transparent;
-    /* thumb & track color */
 }
 
 .scrollbar-thin::-webkit-scrollbar {

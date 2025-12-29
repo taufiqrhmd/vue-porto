@@ -95,18 +95,15 @@ const timelineContainer = ref(null);
 const lightBeam = ref(null);
 const timelineItems = ref([]);
 
-// Penampung khusus agar tidak membunuh section lain
 let journeyTriggers = [];
 
 const setItems = (el) => {
     if (el) timelineItems.value.push(el);
 };
 
-// Fungsi Fetch
 async function fetchExperiences() {
     try {
         isLoading.value = true;
-        // JANGAN kill semua ScrollTrigger di sini
 
         const { data, error } = await supabase
             .from('experiences')
@@ -119,7 +116,6 @@ async function fetchExperiences() {
         await nextTick();
         setTimeout(() => {
             initAnimations();
-            // WAJIB: Update kalkulasi posisi setelah data muncul
             ScrollTrigger.refresh();
         }, 300);
     } catch (err) {
@@ -130,7 +126,6 @@ async function fetchExperiences() {
 }
 
 function initAnimations() {
-    // Hanya bersihkan animasi journey sebelumnya jika ada
     journeyTriggers.forEach(t => t.kill());
     journeyTriggers = [];
 
@@ -148,11 +143,9 @@ function initAnimations() {
                 },
             }
         );
-        // Simpan ke array lokal
         if (anim.scrollTrigger) journeyTriggers.push(anim.scrollTrigger);
     });
 
-    // Animasi Light Beam
     if (lightBeam.value && timelineContainer.value) {
         gsap.to(lightBeam.value, {
             opacity: 1,
@@ -181,7 +174,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    // Hanya matikan animasi milik section ini saja saat pindah halaman
     journeyTriggers.forEach(t => t.kill());
 });
 </script>

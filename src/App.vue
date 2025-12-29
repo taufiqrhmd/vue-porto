@@ -50,10 +50,7 @@
         <TechShowcase />
         <ProjectsSection />
         <ExperienceSection />
-
-        <div class="h-screen bg-white">
-
-        </div>
+        <ContactSection />
 
       </div>
     </div>
@@ -68,6 +65,7 @@ import TechShowcase from '@/views/TechShowcase.vue'
 import ProjectsSection from '@/views/ProjectsSection.vue'
 import Button from '@/components/ui/Button.vue'
 import ExperienceSection from '@/views/ExperienceSection.vue'
+import ContactSection from './views/ContactSection.vue'
 
 import { useTypingAnimation } from '@/components/composables/useTypingAnimation'
 import { useHoverSound } from '@/components/composables/useHoverSound'
