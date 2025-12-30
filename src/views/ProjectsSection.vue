@@ -6,17 +6,17 @@
           @close="closeModal" />
       </Transition>
     </Teleport>
+
     <div class="flex items-start h-screen pt-20">
       <div id="projects" class="w-full">
-        <h2
-          class="font-title text-4xl italic text-center mb-10 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        <h2 ref="projectHeading"
+          class="font-title text-4xl italic text-center mt-2 mb-10 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent opacity-0">
           Featured Projects
         </h2>
 
         <div v-if="!isLoading" ref="carouselWrapper" class="flex flex-nowrap gap-10 px-[5vw]">
-
           <div v-for="project in supabaseProjects" :key="project.id"
-            class="project-card shrink-0 w-[80vw] md:w-[70vw] lg:w-[60vw] h-[72vh] relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800">
+            class="project-card shrink-0 w-[80vw] md:w-[70vw] lg:w-[60vw] h-[72vh] relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800 opacity-0 translate-y-20">
             <img :src="project.image_url" class="w-full h-full object-cover" />
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/90 flex flex-col items-center justify-end pb-12 px-6 text-white opacity-0 hover:opacity-100 transition-opacity duration-500 text-center">
@@ -52,6 +52,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const scrollSection = ref(null);
 const carouselWrapper = ref(null);
+const projectHeading = ref(null); // Ref baru untuk judul
 let ctx;
 const supabaseProjects = ref([]);
 const isLoading = ref(true);
@@ -59,10 +60,6 @@ const isLoading = ref(true);
 const showModal = ref(false);
 const selectedProject = ref(null);
 const selectedDetails = ref(null);
-
-onUnmounted(() => {
-  if (ctx) ctx.revert();
-});
 
 const getSupabaseData = async () => {
   try {
@@ -81,45 +78,33 @@ const getSupabaseData = async () => {
   };
 }
 
+// Logika Modal (tetap sama) ...
 const openDetail = async (project) => {
   const smoother = ScrollSmoother.get();
-  
   if (smoother) {
     const scrollPos = smoother.scrollTop();
     smoother.paused(true);
     document.body.setAttribute('data-last-pos', scrollPos);
   }
-
-  const { data, error } = await supabase
-    .from('project_details')
-    .select('*')
-    .eq('project_id', project.id)
-    .single();
-
+  const { data, error } = await supabase.from('project_details').select('*').eq('project_id', project.id).single();
   if (!error && data) {
     selectedDetails.value = data;
     selectedProject.value = project;
     showModal.value = true;
     document.body.style.overflow = 'hidden';
-  } else {
-    if (smoother) smoother.paused(false);
-  }
+  } else if (smoother) smoother.paused(false);
 };
 
 const closeModal = async () => {
   showModal.value = false;
   await nextTick();
-
   const smoother = ScrollSmoother.get();
   const lastPos = document.body.getAttribute('data-last-pos');
-
   if (smoother) {
     if (lastPos) smoother.scrollTop(parseInt(lastPos));
-    
     smoother.paused(false);
     ScrollTrigger.refresh();
   }
-  
   document.body.style.overflow = '';
 };
 
@@ -132,7 +117,32 @@ onMounted(async () => {
     const viewportWidth = window.innerWidth;
     const amountToScroll = scrollWidth - viewportWidth + (viewportWidth * 0.1);
 
-    let ctx = gsap.context(() => {
+    ctx = gsap.context(() => {
+      // 1. ANIMASI MASUK (ENTRANCE)
+      const entranceTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: scrollSection.value,
+          start: "top 80%", // Mulai animasi saat section mendekati layar
+          toggleActions: "play none none none"
+        }
+      });
+
+      entranceTl
+        .to(projectHeading.value, { 
+          opacity: 1, 
+          y: -20, 
+          duration: 1, 
+          ease: "power4.out" 
+        })
+        .to(".project-card", {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15, // Muncul satu persatu
+          ease: "back.out(1.2)"
+        }, "-=0.6");
+
+      // 2. ANIMASI HORIZONTAL SCROLL (PINNING)
       gsap.to(carouselWrapper.value, {
         x: () => -amountToScroll,
         ease: "none",
@@ -148,11 +158,11 @@ onMounted(async () => {
         },
       });
     }, scrollSection.value);
-
-    onUnmounted(() => {
-      ctx.revert();
-    });
   }
+});
+
+onUnmounted(() => {
+  if (ctx) ctx.revert();
 });
 </script>
 
@@ -166,5 +176,10 @@ onMounted(async () => {
 .modal-fade-leave-to {
   opacity: 0;
   transform: scale(0.9);
+}
+
+/* State awal untuk animasi GSAP */
+.project-card {
+  will-change: transform, opacity;
 }
 </style>

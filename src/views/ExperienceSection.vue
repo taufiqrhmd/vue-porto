@@ -1,11 +1,11 @@
 <template>
     <section class="py-20 px-4 bg-gradient-to-b from-galaxy-darker to-black relative overflow-hidden">
         <div id="experience" class="max-w-7xl mx-auto relative z-10">
-            <h2
+            <h2 ref="headerTitle"
                 class="text-4xl md:text-5xl font-bold font-title italic text-center mb-4 pb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                 My Journey
             </h2>
-            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+            <p ref="headerSub" class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
                 From intensive bootcamp to real-world product development — each step shaped how I build impactful
                 digital experiences.
             </p>
@@ -94,6 +94,8 @@ const isLoading = ref(true);
 const timelineContainer = ref(null);
 const lightBeam = ref(null);
 const timelineItems = ref([]);
+const headerTitle = ref(null);
+const headerSub = ref(null);
 
 let journeyTriggers = [];
 
@@ -129,6 +131,27 @@ function initAnimations() {
     journeyTriggers.forEach(t => t.kill());
     journeyTriggers = [];
 
+    const headerTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: headerTitle.value,
+            start: "top 90%",
+            toggleActions: "play none none none"
+        }
+    });
+
+    headerTl.to(headerTitle.value, {
+        opacity: 1,
+        y: -20,
+        duration: 0.8,
+        ease: "power3.out"
+    })
+    .to(headerSub.value, {
+        opacity: 1,
+        y: -10,
+        duration: 0.8,
+        ease: "power3.out"
+    }, "-=0.4");
+
     timelineItems.value.forEach((item) => {
         const anim = gsap.fromTo(item,
             { opacity: 0, y: 30 },
@@ -163,7 +186,7 @@ function initAnimations() {
                 trigger: timelineContainer.value,
                 start: "top 20%",
                 end: "bottom 80%",
-                scrub: 1,
+                scrub: 2,
             }
         });
     }
