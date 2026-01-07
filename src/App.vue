@@ -58,7 +58,6 @@
 </template>
 
 <script setup>
-import bgImage from '/images/bg-milkyway.jpg'
 import Topbar from '@/layout/Topbar.vue'
 import HeroSection from './views/HeroSection.vue'
 import ProfileSection from '@/views/ProfileSection.vue'
@@ -103,13 +102,7 @@ onMounted(() => {
 
   const waitForReady = () => {
     const fontsLoaded = document.fonts ? document.fonts.ready : Promise.resolve()
-    const bgImg = new Image()
-    bgImg.src = bgImage
-    const imageLoaded = new Promise((resolve) => {
-      if (bgImg.complete) resolve()
-      else { bgImg.onload = resolve; bgImg.onerror = resolve; }
-    })
-    return Promise.all([fontsLoaded, imageLoaded])
+    return Promise.all([fontsLoaded])
   }
 
   waitForReady().then(() => {
