@@ -1,8 +1,8 @@
 <template>
-  <section id="profile" ref="sectionContainer" class="min-h-screen pt-32 relative overflow-hidden opacity-0">
+  <section id="profile" ref="sectionContainer" class="min-h-screen pt-20 md:pt-32 relative overflow-hidden opacity-0">
     <div class="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none"></div>
 
-    <div class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 p-10 md:py-12 px-4 md:px-10 md:mx-24 relative overflow-hidden border border-white/5">
+    <div class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 p-6 md:p-12 px-4 mx-4 md:mx-24 relative overflow-hidden border border-white/5">
       
       <div class="absolute inset-0 pointer-events-none">
         <div class="shimmer-sweep"></div>
@@ -16,39 +16,40 @@
         STATUS: <span class="text-galaxy-magenta animate-pulse">ONLINE</span>
       </div>
 
-      <div class="flex flex-col items-start gap-6 md:gap-8 max-w-7xl mx-auto relative z-20">
-        <div class="flex-shrink-0 w-full">
+      <div class="flex flex-col items-center md:items-start gap-6 md:gap-8 max-w-7xl mx-auto relative z-20">
+        <div class="flex-shrink-0 w-full text-center md:text-left">
           <h1 ref="title"
-            class="text-3xl md:text-6xl lg:text-7xl font-title italic bg-gradient-to-r from-glow-start via-glow-mid to-glow-end bg-clip-text text-transparent tracking-tighter leading-none">
+            class="text-4xl md:text-6xl lg:text-7xl font-title italic bg-gradient-to-r from-glow-start via-glow-mid to-glow-end bg-clip-text text-transparent tracking-tighter leading-none">
             / About
           </h1>
         </div>
 
-        <div class="flex flex-col md:flex-row items-start gap-6 md:gap-12 max-w-7xl px-4 md:px-10 mx-auto">
-          <div ref="profileImg" class="flex-shrink-0 mt-1 relative group" aria-hidden="true">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12 max-w-7xl px-0 md:px-10 mx-auto">
+          
+          <div ref="profileImg" class="hidden md:block flex-shrink-0 mt-1 relative group" aria-hidden="true">
             <div class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-galaxy-cyan z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#4fc3f7] group-hover:-top-3 group-hover:-left-3"></div>
             <div class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-galaxy-magenta z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#c77dff] group-hover:-bottom-3 group-hover:-right-3"></div>
             
             <div class="relative overflow-hidden rounded-sm border border-white/10 bg-galaxy-darker">
               <div class="absolute inset-0 bg-scanlines opacity-20 pointer-events-none z-10"></div>
               <img src="/images/profil.jpg" alt="Taufiq" 
-                class="w-28 h-40 md:w-80 md:h-[370px] rounded-sm object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105" />
+                class="w-80 h-[370px] rounded-sm object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-tr from-galaxy-cyan/30 via-transparent to-galaxy-magenta/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
             </div>
           </div>
 
-          <div ref="textContent" class="flex-1 min-w-0 space-y-6 font-sans font-light">
-            <blockquote class="text-md md:text-lg text-galaxy-text leading-relaxed text-justify relative">
+          <div ref="textContent" class="flex-1 min-w-0 space-y-6 font-sans font-light text-center md:text-left">
+            <blockquote class="text-md md:text-lg text-galaxy-text leading-relaxed text-center md:text-justify relative border-l-0 md:border-l-2 md:pl-6">
               <span class="text-galaxy-cyan font-mono opacity-50 text-2xl">“</span>
               {{ desc }}
               <span class="text-galaxy-cyan ml-2 font-mono opacity-50 text-2xl">”</span>
             </blockquote>
             
-            <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-galaxy-text-muted opacity-80 font-mono pt-4 border-t border-white/5">
+            <p class="text-[10px] md:text-sm uppercase tracking-[0.2em] text-galaxy-text-muted opacity-80 font-mono pt-4 border-t border-white/5">
               // <span class="text-glow-mid">Currently_working:</span> freelance_projects [Fullstack_Dev]
             </p>
 
-            <div class="flex flex-wrap gap-4">
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
               <Button color="outline" size="sm" icon="download" class="btn-sci-fi" @click="downloadCV">See CV</Button>
               <Button v-if="githubLink" color="outline" size="sm" :icon="['fab', 'github']" class="btn-sci-fi"
                 @click="(e) => { openLink(githubLink); e.currentTarget.blur(); }">GitHub</Button>
