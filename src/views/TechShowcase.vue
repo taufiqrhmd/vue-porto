@@ -1,14 +1,16 @@
 <template>
-  <section ref="showcaseContainer" class="py-16 px-4 opacity-0">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-      
-      <div ref="textCol" class="md:w-1/2 space-y-4 pl-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-galaxy-blue">
-          {{ displayContent.title }}
-        </h2>
-        <p class="text-lg text-galaxy-text-muted leading-relaxed">
-          {{ displayContent.description }}
-        </p>
+  <section ref="showcaseContainer" class="px-4 opacity-0">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 pb-12 pt-4">
+      <div ref="textCol" class="md:w-1/2 space-y-4 pl-6 h-32">
+        <div ref="textContent" class="space-y-4">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-glow-start to-glow-mid">
+            {{ displayContent.title }}
+          </h2>
+          <p class="text-lg text-galaxy-text-muted leading-relaxed">
+            {{ displayContent.description }}
+          </p>
+        </div>
       </div>
 
       <div class="md:w-1/2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-5 place-items-center">
@@ -26,7 +28,7 @@
             " />
           <span class="mt-3 text-sm font-medium transition-colors duration-300" :class="{
             'text-galaxy-text-muted': hoveredTechId !== tech.id,
-            'text-galaxy-blue': hoveredTechId === tech.id,
+            'text-galaxy-magenta': hoveredTechId === tech.id,
           }">
             {{ tech.name }}
           </span>
@@ -45,8 +47,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const intro = {
-  title: 'Teknologi yang Saya Kuasai',
-  description: 'Berikut stack teknologi yang saya kuasai — dari frontend, backend, hingga mobile.',
+  title: 'Digital Toolkit',
+  description: 'Carefully chosen tools that balance power, elegance, and clarity—where clean code meets creative expression.',
 };
 
 const technologies = ref([]);
@@ -58,6 +60,7 @@ let leaveTimer = null;
 // Refs untuk animasi
 const showcaseContainer = ref(null);
 const textCol = ref(null);
+const textContent = ref(null);
 
 async function fetchTechnologies() {
   try {
@@ -90,41 +93,62 @@ function initAnimation() {
 
   // 1. Munculkan container utama
   tl.to(showcaseContainer.value, { opacity: 1, duration: 0.5 })
-  
-  // 2. Animasi teks dari kiri
-  .from(textCol.value, {
-    x: -50,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  }, "-=0.3")
 
-  // 3. Animasi stagger ikon (muncul satu per satu)
-  .to(".tech-card", {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    duration: 0.5,
-    stagger: 0.1, // Jeda antar item 0.1 detik
-    ease: "back.out(1.7)",
-    startAt: { y: 30, scale: 0.8 } // Keadaan awal sebelum animasi
-  }, "-=0.5");
+    // 2. Animasi teks dari kiri
+    .from(textCol.value, {
+      x: -50,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.3")
+
+    // 3. Animasi stagger ikon (muncul satu per satu)
+    .to(".tech-card", {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.5,
+      stagger: 0.1, // Jeda antar item 0.1 detik
+      ease: "back.out(1.7)",
+      startAt: { y: 30, scale: 0.8 } // Keadaan awal sebelum animasi
+    }, "-=0.5");
 }
 
 onMounted(() => {
   fetchTechnologies();
 });
 
+function updateTextAnim(newContent) {
+  gsap.to(textContent.value, {
+    opacity: 0,
+    y: -10,
+    duration: 0.2,
+    ease: "power2.in",
+    onComplete: () => {
+      // Ganti konten setelah teks lama menghilang
+      displayContent.value = newContent;
+      
+      // Animasi teks baru muncul
+      gsap.fromTo(textContent.value, 
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  });
+}
+
 function onHover(tech) {
   clearTimeout(leaveTimer);
+  if (hoveredTechId.value === tech.id) return; // Hindari trigger jika sudah aktif
+  
   hoveredTechId.value = tech.id;
-  displayContent.value = tech;
+  updateTextAnim(tech); // Gunakan animasi
 }
 
 function onLeave() {
   leaveTimer = setTimeout(() => {
     hoveredTechId.value = null;
-    displayContent.value = intro;
+    updateTextAnim(intro); // Kembali ke intro dengan animasi
   }, 200);
 }
 

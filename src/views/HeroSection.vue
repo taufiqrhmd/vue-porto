@@ -1,58 +1,231 @@
 <template>
-    <section id="hero-section"
-        class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 py-10 px-6 md:px-12 lg:px-18 xl:px-24 w-full">
-        <div class="text-left max-w-2xl">
-            <h1 class="text-3xl font-heading tracking-wide font-extrabold md:text-5xl bg-clip-text text-galaxy-text animate-fade-in-right opacity-0" style="animation-delay: 0.2s">
-                Hello, <span class="bg-clip-text text-transparent bg-gradient-to-r from-glow-end to-glow-start">it's
-                    me</span>
+  <section id="hero-section" class="relative z-10 flex items-end justify-center overflow-hidden w-full min-h-screen">
+    <div class="absolute bottom-0 left-0 w-full h-28 md:h-36 z-30 bg-gradient-to-t from-galaxy-darker to-transparent">
+    </div>
+    <div class="relative w-full h-full max-w-7xl mx-auto flex items-end justify-center">
+      <img ref="heroImg" src="/images/bg.png"
+        class="relative h-[90%] w-auto object-contain object-bottom z-20 pointer-events-none" />
+
+      <div ref="interactiveArea"
+        class="absolute bottom-10 md:bottom-20 z-40 w-full flex justify-center items-center transform translate-y-10 md:translate-y-16"
+        @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
+        <div class="relative inline-block">
+          <div ref="roleTextContainer"
+            class="absolute -top-8 md:-top-12 left-0 w-full overflow-hidden h-8 md:h-12 pointer-events-none"
+            style="opacity: 0;">
+
+            <div class="scan-line absolute left-0 w-2/6 h-[1px] bg-gradient-to-r from-galaxy-cyan via-galaxy-cyan to-transparent z-50 shadow-[0_0_15px_rgba(255,0,255,0.8)]">
+            </div>
+
+            <div class="relative h-full w-full font-sciFi">
+              <span v-for="(word, index) in words" :key="index" :ref="(el) => roleWords[index] = el"
+                class="absolute left-2 top-0 w-full text-left text-sm md:text-2xl font-bold text-galaxy-text-muted uppercase tracking-[0.2em] flex items-center h-full">
+                {{ word }}
+              </span>
+            </div>
+          </div>
+
+          <div class="relative overflow-visible pb-6 md:pb-10">
+            <h1 ref="mainTitle"
+              class="text-[15vw] md:text-[12vw] font-black uppercase leading-[0.9] text-transparent pointer-events-none"
+              style="-webkit-text-stroke: 2px rgba(255,255,255,0.4);">
+              TAUFIQ DEV
             </h1>
-            <h4 class="mt-1 text-3xl md:text-6xl font-heading font-extrabold bg-clip-text text-galaxy-text animate-fade-in-right opacity-0" style="animation-delay: 0.2s"">
-                TAUFIQ RAHMADI
-            </h4>
-            <p class="mt-1 text-2xl md:text-4xl font-extrabold text-galaxy-text animate-fade-in-right opacity-0" style="animation-delay: 0.4s"">
-                I'am a <span ref="typingSpan"
-                    class="font-sciFi bg-clip-text text-transparent bg-gradient-to-r from-glow-end to-glow-start">
-                    {{ currentText }}
-                </span>
-            </p>
-            <p class="mt-2 text-lg md:text-xl font-extralight text-galaxy-text animate-fade-in-right opacity-0" style="animation-delay: 0.6s"">
-                Welcome to my portfolio website!
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3 font-sciFi animate-fade-in-up opacity-0" style="animation-delay: 0.8s"">
-                <Button color="outline" size="md" icon="download" @click="downloadCV">See CV</Button>
-                <Button color="outline" size="md" :icon="['fab', 'github']"
-                    @click="() => openLink(githubLink)">GitHub</Button>
-                <Button color="outline" size="md" :icon="['fab', 'linkedin-in']"
-                    @click="() => openLink(linkedinLink)">LinkedIn</Button>
-            </div>
-        </div>
 
-        <div class="flex-shrink-0">
-            <div ref="profileElement" class="profile-circle animate-profile-entrance"
-                @mouseenter="hoverSound.play" @mouseleave="hoverSound.stop">
-                <img src="@/assets/images/profil.jpg" alt="Taufiq" class="w-full h-full object-cover" />
-            </div>
+            <h1 ref="filledTitle"
+              class="filled-text absolute top-0 left-0 w-full text-[15vw] md:text-[12vw] font-black uppercase leading-[0.9] text-galaxy-cyan pointer-events-none"
+              style="clip-path: circle(0% at 50% 50%);">
+              TAUFIQ DEV
+            </h1>
+          </div>
         </div>
-
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
-import Button from '@/components/ui/VButton.vue'
-import { useTypingAnimation } from '@/components/composables/useTypingAnimation'
-import { useHoverSound } from '@/components/composables/useHoverSound'
-import { downloadCV, openLink } from '@/components/composables/useExternalAction'
+import { onMounted, ref, onBeforeUnmount } from 'vue';
+import { gsap } from 'gsap';
 
-const words = [
-  "Web Developer.",
-  "Mobile Developer.",
-  "Frontend Engineer.",
-  "Tech Enthusiast."
-]
+// Data
+const words = ["Web Developer.", "Mobile Developer.", "Frontend Engineer.", "Tech Enthusiast."];
 
-const { currentText } = useTypingAnimation(words)
-const hoverSound = useHoverSound('/src/assets/images/Sound.mp3', 0.3)
+// Refs
+const heroImg = ref(null);
+const mainTitle = ref(null);
+const filledTitle = ref(null);
+const roleTextContainer = ref(null);
+const interactiveArea = ref(null);
+const roleWords = ref([]); // array untuk menyimpan ref tiap role-word
 
-const githubLink = 'https://github.com/taufiqrhmd'
-const linkedinLink = 'https://linkedin.com/in/mohamad-taufiq-rahmadi'
+// Timeline (opsional, untuk cleanup)
+let heroTimeline = null;
+
+onMounted(() => {
+  // Pastikan semua ref sudah ada
+  if (!heroImg.value || !mainTitle.value || !filledTitle.value) return;
+
+  // 1. Intro Image
+  gsap.from(heroImg.value, {
+    y: 50,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power4.out"
+  });
+
+  // 2. Intro Text Utama (kedua h1)
+  gsap.from([mainTitle.value, filledTitle.value], {
+    x: 50,
+    opacity: 0,
+    duration: 1.2,
+    delay: 0.5,
+    ease: "power3.out"
+  });
+
+  // 3. Role text container muncul & mulai animasi
+  gsap.to(roleTextContainer.value, {
+    opacity: 1,
+    duration: 1,
+    delay: 1.2,
+    onStart: () => {
+      // Set posisi awal role words
+      const wordsEls = roleWords.value.filter(Boolean);
+      gsap.set(wordsEls, { yPercent: 100 });
+      if (wordsEls[0]) gsap.set(wordsEls[0], { yPercent: 0 });
+    },
+    onComplete: startRoleTextAnimation
+  });
+});
+
+const startRoleTextAnimation = () => {
+  const wordsEls = roleWords.value.filter(Boolean);
+  const scanLine = roleTextContainer.value.querySelector('.scan-line');
+  if (wordsEls.length === 0) return;
+
+  gsap.set(wordsEls, { yPercent: 100, skewX: -20, opacity: 0 });
+  gsap.set(wordsEls[0], { yPercent: 0, skewX: 0, opacity: 1 });
+  gsap.set(scanLine, { top: "0%" });
+
+  heroTimeline = gsap.timeline({ repeat: -1 });
+
+  wordsEls.forEach((wordEl, i) => {
+    const nextWordEl = wordsEls[(i + 1) % wordsEls.length];
+    
+    heroTimeline
+      // 1. Gerakan Scan Line menyapu kebawah sebelum teks ganti
+      .to(scanLine, { top: "100%", duration: 0.7, ease: "power2.inOut" }, "+=2")
+      
+      // 2. Teks lama keluar dengan efek miring (skew)
+      .to(wordEl, {
+        yPercent: 100,
+        skewX: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power4.inOut"
+      }, "<")
+
+      // 3. Teks baru masuk dengan efek miring
+      .fromTo(nextWordEl,
+        { yPercent: -100, skewX: -20, opacity: 0 },
+        {
+          yPercent: 0,
+          skewX: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power4.out",
+          immediateRender: false
+        },
+        "<0.1"
+      )
+      
+      // 4. Scan Line balik ke atas dengan cepat untuk persiapan berikutnya
+      .to(scanLine, { top: "0%", duration: 0.4, ease: "power2.out" });
+  });
+};
+
+const handleMouseMove = (e) => {
+  if (!filledTitle.value) return;
+  const rect = interactiveArea.value.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  gsap.to(filledTitle.value, {
+    clipPath: `circle(120px at ${x}px ${y}px)`,
+    duration: 0.2,
+    ease: "none",
+    overwrite: "auto"
+  });
+};
+
+const handleMouseLeave = (e) => {
+  if (!filledTitle.value) return;
+  const rect = interactiveArea.value.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  gsap.to(filledTitle.value, {
+    clipPath: `circle(0px at ${x}px ${y}px)`,
+    duration: 0.4,
+    ease: "power2.in",
+    overwrite: "auto"
+  });
+};
+
+// Cleanup saat komponen dihancurkan (penting untuk SPA)
+onBeforeUnmount(() => {
+  if (heroTimeline) {
+    heroTimeline.kill();
+    heroTimeline = null;
+  }
+  // Bersihkan inline styles GSAP (opsional tapi baik)
+  [heroImg, mainTitle, filledTitle, roleTextContainer].forEach(refEl => {
+    if (refEl.value && refEl.value.style) {
+      refEl.value.style.cssText = ''; // atau clearProps via GSAP jika diinginkan
+    }
+  });
+});
 </script>
+
+<style scoped>
+section {
+  overflow: hidden;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.9; }
+  5% { opacity: 0.5; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.3; }
+  20% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+.font-sciFi {
+  text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+  animation: flicker 3s infinite;
+}
+
+.scan-line {
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+h1 {
+  font-family: 'Arial Black', sans-serif;
+  line-height: 0.9;
+  white-space: nowrap;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform, opacity;
+}
+
+.filled-text {
+  display: block;
+  will-change: clip-path;
+}
+
+.inline-block {
+  transform-style: preserve-3d;
+}
+</style>

@@ -1,38 +1,74 @@
 <template>
-  <header
-    class="fixed left-10 right-10 z-50 bg-transparent font-sciFi backdrop-blur-sm px-4 md:px-8 py-2 rounded-lg text-white animate-fade-in-down">
-    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-      <div id="brand-logo" class="text-xl font-bold cursor-pointer hover:text-blue-600 transition-colors"
-        @click="scrollToTop">
-        Taufiq
-      </div>
+  <header ref="topbarRef"
+    class="fixed left-6 right-6 md:left-10 md:right-10 z-[60] bg-transparent font-sciFi backdrop-blur-md px-4 md:px-8 py-3 rounded-xl text-galaxy-text opacity-0 border-b border-galaxy-blue/20"
+    :class="{ 'pointer-events-none': isHidden }">
 
-      <nav class="hidden md:flex space-x-8">
-        <button @click="scrollToSection('#profil')" class="hover:text-indigo-300 transition-colors">About</button>
-        <button @click="scrollToSection('#projects')" class="hover:text-indigo-300 transition-colors">Projects</button>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-galaxy-cyan to-transparent shadow-[0_0_10px_#4fc3f7]"></div>
+
+    <div class="container mx-auto flex justify-center items-center">
+      <nav class="hidden md:flex items-center space-x-2 tracking-[0.2em]">
+        
+        <button @click="scrollToSection('#profile')"
+          class="nav-btn group relative px-6 py-2 uppercase text-[11px] text-galaxy-text-muted hover:text-galaxy-cyan transition-all duration-300">
+          <span class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:left-2 transition-all text-galaxy-cyan">[</span>
+          <span class="relative z-10">About</span>
+          <span class="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:right-2 transition-all text-galaxy-cyan">]</span>
+          <div class="scanner-line"></div>
+        </button>
+
+        <button @click="scrollToSection('#projects')"
+          class="nav-btn group relative px-6 py-2 uppercase text-[11px] text-galaxy-text-muted hover:text-galaxy-cyan transition-all duration-300">
+          <span class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:left-2 transition-all text-galaxy-cyan">[</span>
+          <span class="relative z-10">Projects</span>
+          <span class="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:right-2 transition-all text-galaxy-cyan">]</span>
+          <div class="scanner-line"></div>
+        </button>
+
         <button @click="scrollToSection('#experience')"
-          class="hover:text-indigo-300 transition-colors">Experience</button>
-        <button @click="scrollToSection('#contact')" class="hover:text-indigo-300 transition-colors">Contact</button>
+          class="nav-btn group relative px-6 py-2 uppercase text-[11px] text-galaxy-text-muted hover:text-galaxy-cyan transition-all duration-300">
+          <span class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:left-2 transition-all text-galaxy-cyan">[</span>
+          <span class="relative z-10">Experience</span>
+          <span class="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:right-2 transition-all text-galaxy-cyan">]</span>
+          <div class="scanner-line"></div>
+        </button>
+
+        <button @click="scrollToSection('#contact')"
+          class="nav-btn group relative px-6 py-2 uppercase text-[11px] text-galaxy-text-muted hover:text-galaxy-cyan transition-all duration-300">
+          <span class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:left-2 transition-all text-galaxy-cyan">[</span>
+          <span class="relative z-10">Contact</span>
+          <span class="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:right-2 transition-all text-galaxy-cyan">]</span>
+          <div class="scanner-line"></div>
+        </button>
+
       </nav>
 
-      <button class="md:hidden text-gray-400 hover:text-white focus:outline-none" @click="toggleMobileMenu">
-        <span class="text-2xl">{{ isMobileMenuOpen ? '✕' : '☰' }}</span>
+      <button class="md:hidden text-galaxy-cyan p-2 ml-auto focus:outline-none" @click="toggleMobileMenu" :disabled="isHidden">
+        <div class="w-6 h-5 flex flex-col justify-between items-end">
+          <span class="h-[1.5px] bg-galaxy-cyan transition-all duration-300" :class="isMobileMenuOpen ? 'w-6 rotate-45 translate-y-2' : 'w-6'"></span>
+          <span class="h-[1.5px] bg-galaxy-cyan transition-all duration-300" :class="isMobileMenuOpen ? 'opacity-0' : 'w-4'"></span>
+          <span class="h-[1.5px] bg-galaxy-cyan transition-all duration-300" :class="isMobileMenuOpen ? 'w-6 -rotate-45 -translate-y-2' : 'w-5'"></span>
+        </div>
       </button>
     </div>
 
-    <transition name="slide-fade">
-      <div v-if="isMobileMenuOpen" class="md:hidden bg-gray-800/95 backdrop-blur-lg py-4 px-4 border-t border-gray-700">
-      <div class="flex flex-col space-y-4 text-left">
-        <button @click="scrollToSection('#profil')"
-          class="py-2 text-left hover:text-indigo-300 transition-colors">About</button>
-        <button @click="scrollToSection('#projects')"
-          class="py-2 text-left hover:text-indigo-300 transition-colors">Projects</button>
-        <button @click="scrollToSection('#experience')"
-          class="py-2 text-left hover:text-indigo-300 transition-colors">Experience</button>
-        <button @click="scrollToSection('#contact')"
-          class="py-2 text-left hover:text-indigo-300 transition-colors">Contact</button>
+    <transition name="scifi-slide">
+      <div v-if="isMobileMenuOpen"
+        class="md:hidden absolute top-full left-0 right-0 mt-3 bg-galaxy-card/95 backdrop-blur-xl py-6 px-6 rounded-2xl border border-galaxy-blue/30 shadow-2xl">
+        <div class="flex flex-col space-y-4">
+          <button @click="scrollToSection('#profile')" class="text-left py-3 px-4 border-l-2 border-transparent hover:border-galaxy-cyan hover:bg-galaxy-cyan/10 text-galaxy-text-muted hover:text-galaxy-cyan transition-all uppercase tracking-widest text-xs">
+            About
+          </button>
+          <button @click="scrollToSection('#projects')" class="text-left py-3 px-4 border-l-2 border-transparent hover:border-galaxy-cyan hover:bg-galaxy-cyan/10 text-galaxy-text-muted hover:text-galaxy-cyan transition-all uppercase tracking-widest text-xs">
+            Projects
+          </button>
+          <button @click="scrollToSection('#experience')" class="text-left py-3 px-4 border-l-2 border-transparent hover:border-galaxy-cyan hover:bg-galaxy-cyan/10 text-galaxy-text-muted hover:text-galaxy-cyan transition-all uppercase tracking-widest text-xs">
+            Experience
+          </button>
+          <button @click="scrollToSection('#contact')" class="text-left py-3 px-4 border-l-2 border-transparent hover:border-galaxy-cyan hover:bg-galaxy-cyan/10 text-galaxy-text-muted hover:text-galaxy-cyan transition-all uppercase tracking-widest text-xs">
+            Contact
+          </button>
+        </div>
       </div>
-    </div>
     </transition>
   </header>
 </template>
@@ -41,85 +77,151 @@
 import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
-// Registrasi plugin di luar export default
 gsap.registerPlugin(ScrollToPlugin)
 
 export default {
   name: 'Topbar',
   data() {
     return {
-      isMobileMenuOpen: false
+      isMobileMenuOpen: false,
+      lastScrollY: 0,
+      ticking: false,
+      hideTimeout: null,
+      isHidden: false
     }
   },
+  mounted() {
+    this.initEntranceAnimation()
+    this.setupScrollBehavior()
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.onScroll, { passive: true })
+    if (this.hideTimeout) clearTimeout(this.hideTimeout)
+  },
   methods: {
+    initEntranceAnimation() {
+      this.$nextTick(() => {
+        const tl = gsap.timeline({ delay: 0.2 });
+
+        // 1. Topbar container expansion (Cinematic effect)
+        tl.fromTo(this.$refs.topbarRef, 
+          { y: -60, opacity: 0, scaleX: 0.8 },
+          { y: 0, opacity: 1, scaleX: 1, duration: 0.8, ease: 'expo.out' }
+        );
+
+        // 2. Manual Buttons stagger
+        tl.fromTo('.nav-btn',
+          { y: -20, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.5, 
+            ease: 'power2.out', 
+            stagger: 0.08 
+          },
+          "-=0.4"
+        );
+      })
+    },
     toggleMobileMenu() {
+      if (this.isHidden) return 
       this.isMobileMenuOpen = !this.isMobileMenuOpen
     },
     closeMobileMenu() {
       this.isMobileMenuOpen = false
     },
     scrollToSection(id) {
-      // id yang masuk adalah '#profil'
-      const target = document.querySelector(id);
-
+      const target = document.querySelector(id)
       if (target) {
+        if (this.isHidden) {
+          this.animateTopbar(true)
+        }
         gsap.to(window, {
           duration: 1.2,
-          scrollTo: {
-            y: target,
-            offsetY: 80,
-            autoKill: false
-          },
+          scrollTo: { y: target, autoKill: false },
           ease: 'power2.inOut',
           onComplete: () => {
-            // Menghapus '#' untuk URL. Misal: '#profil' menjadi '/profil'
-            const cleanPath = id.replace('#', '/');
-            history.pushState(null, null, cleanPath);
+            const cleanPath = id.replace('#', '/')
+            history.replaceState(null, null, cleanPath)
           }
-        });
+        })
       }
-      this.closeMobileMenu();
+      this.closeMobileMenu()
     },
-
-    scrollToTop() {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: 0 },
-        ease: 'power2.inOut',
-        onComplete: () => {
-          // Kembali ke root path '/'
-          history.pushState(null, null, '/');
+    setupScrollBehavior() {
+      const onScroll = () => {
+        if (!this.isHidden) {
+          this.animateTopbar(false)
         }
-      });
-      this.closeMobileMenu();
+
+        if (this.hideTimeout) {
+          clearTimeout(this.hideTimeout)
+        }
+
+        this.hideTimeout = setTimeout(() => {
+          this.animateTopbar(true)
+        }, 1000)
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true })
+      this.onScroll = onScroll
+    },
+    animateTopbar(show) {
+      if (this.isHidden === !show) return
+      this.isHidden = !show
+
+      gsap.to(this.$refs.topbarRef, {
+        y: show ? 0 : -80,
+        opacity: show ? 1 : 0,
+        duration: show ? 0.55 : 0.4,
+        ease: show ? 'expo.out' : 'power2.in',
+        overwrite: 'auto'
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-.animate-fade-in-down {
-  animation: fadeInDown 0.8s ease-out forwards;
+.nav-btn {
+  overflow: hidden;
+  position: relative;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animasi Transition Vue untuk Mobile Menu */
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-fade-enter-from, .slide-fade-leave-to {
-  transform: translateY(-10px);
+/* Scanning Laser Line */
+.scanner-line {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4fc3f7, transparent);
+  box-shadow: 0 0 10px #4fc3f7;
   opacity: 0;
+  pointer-events: none;
+}
+
+.nav-btn:hover .scanner-line {
+  animation: scanLoop 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scanLoop {
+  0% { top: -10%; opacity: 0; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* Slide transition for mobile menu */
+.scifi-slide-enter-active,
+.scifi-slide-leave-active {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scifi-slide-enter-from,
+.scifi-slide-leave-to {
+  transform: translateY(-12px) scaleY(0.97);
+  opacity: 0;
+  filter: blur(5px);
 }
 </style>

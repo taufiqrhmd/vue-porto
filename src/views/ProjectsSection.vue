@@ -1,5 +1,5 @@
 <template>
-  <section ref="scrollSection" class="relative overflow-hidden">
+  <section class="relative overflow-hidden">
     <Teleport to="body">
       <Transition name="modal-fade">
         <ProjectModal v-if="showModal" :key="selectedProject?.id" :project="selectedProject" :details="selectedDetails"
@@ -7,14 +7,14 @@
       </Transition>
     </Teleport>
 
-    <div class="flex items-start h-screen pt-20">
-      <div id="projects" class="w-full">
+    <div id="projects" ref="scrollSection" class="flex items-start h-screen pt-20">
+      <div class="w-full">
         <h2 ref="projectHeading"
-          class="font-title text-4xl italic text-center mt-2 mb-10 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent opacity-0">
+          class="font-title text-5xl italic text-center mt-4 mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent opacity-0">
           Featured Projects
         </h2>
 
-        <div v-if="!isLoading" ref="carouselWrapper" class="flex flex-nowrap gap-10 px-[5vw]">
+        <div v-if="!isLoading" ref="carouselWrapper" class="flex flex-nowrap gap-10 px-[7vw]">
           <div v-for="project in supabaseProjects" :key="project.id"
             class="project-card shrink-0 w-[80vw] md:w-[70vw] lg:w-[60vw] h-[72vh] relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800 opacity-0 translate-y-20">
             <img :src="project.image_url" class="w-full h-full object-cover" />
@@ -122,7 +122,7 @@ onMounted(async () => {
       const entranceTl = gsap.timeline({
         scrollTrigger: {
           trigger: scrollSection.value,
-          start: "top 80%", // Mulai animasi saat section mendekati layar
+          start: "top center", // Mulai animasi saat section mendekati layar
           toggleActions: "play none none none"
         }
       });

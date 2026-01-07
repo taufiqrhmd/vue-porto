@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // Ikon yang dibutuhkan
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
-import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons' // ✅ `faLinkedinIn`, bukan `faLinkedin`
+import { faGithub, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons' // ✅ `faLinkedinIn`, bukan `faLinkedin`
 
 // Daftarkan ikon ke library
-library.add(faDownload, faGithub, faLinkedinIn)
+library.add(faDownload, faGithub, faLinkedinIn, faInstagram)
 
 // 🔹 Buat instance app DULU
 const app = createApp(App)
