@@ -3,11 +3,6 @@
     <div class="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none"></div>
 
     <div class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 p-6 md:p-12 px-4 mx-4 md:mx-24 relative overflow-hidden border border-white/5">
-      
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="shimmer-sweep"></div>
-      </div>
-
       <div class="absolute top-4 left-6 text-[10px] font-mono text-galaxy-cyan opacity-70 hidden md:block tracking-widest">
         <span class="inline-block w-2 h-2 rounded-full bg-galaxy-cyan animate-pulse mr-2"></span>
         SYS_REF: 001-ALPHA // TR_CORE
@@ -154,32 +149,6 @@ onMounted(async () => {
   filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
 }
 
-.shimmer-sweep {
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 60%; /* Sedikit lebih lebar */
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(79, 195, 247, 0.1) 30%,  /* Cyan tipis */
-    rgba(255, 255, 255, 0.2) 50%, /* Putih terang di tengah untuk efek kilau */
-    rgba(168, 85, 247, 0.1) 70%,  /* Purple tipis */
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  /* Hapus kata 'inset' karena inset bukan properti animasi standar */
-  animation: sweep 6s infinite ease-in-out; 
-  z-index: 15;
-}
-
-@keyframes sweep {
-  0% { left: -150%; }
-  20% { left: 150%; } /* Selesai menyapu dalam 1.2 detik (20% dari 6s) */
-  100% { left: 150%; } /* Sisanya jeda waktu diam */
-}
-
 /* 2. Monitor Scanlines */
 .bg-scanlines {
   background: linear-gradient(
@@ -206,19 +175,6 @@ onMounted(async () => {
   border-color: #4fc3f7 !important;
 }
 
-/* 4. Judul Blinking Cursor */
-h1::after {
-  content: '_';
-  color: #4fc3f7;
-  text-shadow: 0 0 8px #4fc3f7;
-  animation: blink 1.2s step-end infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-/* 5. Custom Stagger for Description */
 blockquote {
   border-left: 2px solid rgba(168, 85, 247, 0.3);
   padding-left: 1.5rem;

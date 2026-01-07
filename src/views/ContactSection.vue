@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="py-24 px-6 text-white overflow-hidden">
+  <section id="contact" class="py-20 px-6 text-white overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="contact-header text-center mb-20">
         <h2
