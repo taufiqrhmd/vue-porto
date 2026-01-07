@@ -3,7 +3,7 @@
     <div class="absolute bottom-0 left-0 w-full h-28 md:h-36 z-30 bg-gradient-to-t from-galaxy-darker to-transparent">
     </div>
     <div class="relative w-full h-full max-w-7xl mx-auto flex items-end justify-center">
-      <img ref="heroImg" src="/images/bg.png"
+      <img ref="heroImg" src="/images/bg.png" alt="Hero Profile"
         class="relative h-[90%] w-auto object-contain object-bottom z-20 pointer-events-none" />
 
       <div ref="interactiveArea"
