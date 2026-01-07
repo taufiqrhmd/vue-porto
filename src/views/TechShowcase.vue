@@ -1,35 +1,37 @@
 <template>
-  <section ref="showcaseContainer" class="px-4 opacity-0">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 pb-12 pt-4">
-      <div ref="textCol" class="md:w-1/2 space-y-4 pl-6 h-32">
+  <section ref="showcaseContainer" class="px-4 opacity-0 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 pb-12 pt-4">
+
+      <div ref="textCol" class="w-full md:w-1/2 space-y-4 text-center md:text-left md:pl-6 min-h-[160px] md:h-12">
         <div ref="textContent" class="space-y-4">
           <h2
-            class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-glow-start to-glow-mid">
+            class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-glow-start to-glow-mid">
             {{ displayContent.title }}
           </h2>
-          <p class="text-lg text-galaxy-text-muted leading-relaxed">
+          <p class="text-base md:text-lg text-galaxy-text-muted leading-relaxed">
             {{ displayContent.description }}
           </p>
         </div>
       </div>
 
-      <div class="md:w-1/2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-5 place-items-center">
-        <button v-for="tech in technologies" :key="tech.id" type="button"
-          class="tech-card flex flex-col items-center group bg-transparent border-0 p-0 cursor-pointer outline-none opacity-0"
-          @mouseenter="onHover(tech)" @mouseleave="onLeave">
-          <img :src="tech.icon" :alt="tech.name" class="w-12 h-12 object-contain transition-all duration-300 ease-out"
+      <div class="w-full md:w-1/2 flex flex-wrap justify-center gap-4 md:gap-12 place-items-center">
+        <button v-for="tech in technologies" :key="tech.id" type="button" class="tech-card flex flex-col items-center group bg-transparent border-0 p-0 cursor-pointer outline-none opacity-0 
+           w-[20%] min-w-[70px] md:w-auto" @mouseenter="onHover(tech)" @mouseleave="onLeave"
+          @touchstart="onHover(tech)">
+
+          <div class="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+            <img :src="tech.icon" :alt="tech.name"
+              class="w-full h-full object-contain transition-all duration-300 ease-out" :class="{
+                'grayscale opacity-50 scale-100': hoveredTechId !== tech.id,
+                'grayscale-0 opacity-100 scale-110 -translate-y-1': hoveredTechId === tech.id,
+              }" />
+          </div>
+
+          <span class="mt-2 md:mt-3 text-[10px] md:text-sm font-medium transition-colors duration-300 whitespace-nowrap"
             :class="{
-              'grayscale opacity-50 scale-100': hoveredTechId !== tech.id,
-              'grayscale-0 opacity-100 scale-110 -translate-y-1': hoveredTechId === tech.id,
-            }" style="
-              backface-visibility: hidden;
-              transform-style: preserve-3d;
-              will-change: transform, filter;
-            " />
-          <span class="mt-3 text-sm font-medium transition-colors duration-300" :class="{
-            'text-galaxy-text-muted': hoveredTechId !== tech.id,
-            'text-galaxy-magenta': hoveredTechId === tech.id,
-          }">
+              'text-galaxy-text-muted': hoveredTechId !== tech.id,
+              'text-galaxy-magenta': hoveredTechId === tech.id,
+            }">
             {{ tech.name }}
           </span>
         </button>
@@ -127,9 +129,9 @@ function updateTextAnim(newContent) {
     onComplete: () => {
       // Ganti konten setelah teks lama menghilang
       displayContent.value = newContent;
-      
+
       // Animasi teks baru muncul
-      gsap.fromTo(textContent.value, 
+      gsap.fromTo(textContent.value,
         { opacity: 0, y: 10 },
         { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
       );
@@ -140,7 +142,7 @@ function updateTextAnim(newContent) {
 function onHover(tech) {
   clearTimeout(leaveTimer);
   if (hoveredTechId.value === tech.id) return; // Hindari trigger jika sudah aktif
-  
+
   hoveredTechId.value = tech.id;
   updateTextAnim(tech); // Gunakan animasi
 }

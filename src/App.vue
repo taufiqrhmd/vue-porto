@@ -37,9 +37,7 @@
         class="absolute inset-0 rounded-full border-2 border-transparent border-t-glow-start/60 border-l-glow-start/60 animate-spin-slow">
       </div>
 
-      <div
-        class="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-galaxy-darker/90 backdrop-blur-xl transition-all duration-300 group-hover:scale-110 group-hover:border-glow-start group-active:scale-95">
-
+      <div class="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-galaxy-darker/90 backdrop-blur-xl transition-all duration-300 group-hover:scale-110 group-hover:border-glow-start group-active:scale-95">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           class="w-5 h-5 text-white transition-transform duration-300 group-hover:-translate-y-1">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
