@@ -2,13 +2,15 @@
   <section id="profile" ref="sectionContainer" class="min-h-screen pt-20 md:pt-32 relative overflow-hidden opacity-0">
     <div class="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none"></div>
 
-    <div class="galaxy-outline-moving bg-galaxy-bg rounded-xl z-10 p-6 md:p-12 px-4 mx-4 md:mx-24 relative overflow-hidden border border-white/5">
-      <div class="absolute top-4 left-6 text-[10px] font-mono text-galaxy-cyan opacity-70 hidden md:block tracking-widest">
+    <div class="bg-galaxy-bg backdrop-blur-lg rounded-xl z-10 p-6 md:p-12 px-4 mx-4 md:mx-24 relative overflow-hidden border border-white/5">
+      <div ref="topLeftBadge"
+        class="absolute top-4 left-6 text-[10px] font-mono text-galaxy-cyan opacity-70 hidden md:block tracking-widest">
         <span class="inline-block w-2 h-2 rounded-full bg-galaxy-cyan animate-pulse mr-2"></span>
         SYS_REF: 001-ALPHA // TR_CORE
       </div>
-      <div class="absolute bottom-4 right-6 text-[10px] font-mono text-galaxy-magenta opacity-70 hidden md:block tracking-widest">
-        STATUS: <span class="text-galaxy-magenta animate-pulse">ONLINE</span>
+      <div ref="bottomRightBadge"
+        class="absolute bottom-4 right-6 text-[10px] font-mono text-galaxy-cyan opacity-70 hidden md:block tracking-widest">
+        STATUS: <span class="text-galaxy-cyan animate-pulse">ONLINE</span>
       </div>
 
       <div class="flex flex-col items-center md:items-start gap-6 md:gap-8 max-w-7xl mx-auto relative z-20">
@@ -19,29 +21,38 @@
           </h1>
         </div>
 
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12 max-w-7xl px-0 md:px-10 mx-auto">
-          
+        <div
+          class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12 max-w-7xl px-0 md:px-10 mx-auto">
+
           <div ref="profileImg" class="hidden md:block flex-shrink-0 mt-1 relative group" aria-hidden="true">
-            <div class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-galaxy-cyan z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#4fc3f7] group-hover:-top-3 group-hover:-left-3"></div>
-            <div class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-galaxy-magenta z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#c77dff] group-hover:-bottom-3 group-hover:-right-3"></div>
-            
+            <div
+              class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-galaxy-cyan z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#4fc3f7] group-hover:-top-3 group-hover:-left-3">
+            </div>
+            <div
+              class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-galaxy-magenta z-20 transition-all duration-500 group-hover:shadow-[0_0_15px_#c77dff] group-hover:-bottom-3 group-hover:-right-3">
+            </div>
+
             <div class="relative overflow-hidden rounded-sm border border-white/10 bg-galaxy-darker">
               <div class="absolute inset-0 bg-scanlines opacity-20 pointer-events-none z-10"></div>
-              <img src="/images/profil.jpg" alt="Taufiq" 
+              <img src="/images/profil.jpg" alt="Taufiq"
                 class="w-80 h-[370px] rounded-sm object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-tr from-galaxy-cyan/30 via-transparent to-galaxy-magenta/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-tr from-galaxy-cyan/30 via-transparent to-galaxy-magenta/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+              </div>
             </div>
           </div>
 
           <div ref="textContent" class="flex-1 min-w-0 space-y-6 font-sans font-light text-center md:text-left">
-            <blockquote class="text-md md:text-lg text-galaxy-text leading-relaxed text-center md:text-justify relative border-l-0 md:border-l-2 md:pl-6">
+            <blockquote
+              class="text-md md:text-lg text-galaxy-text leading-relaxed text-center md:text-justify relative border-l-0 md:border-l-2 md:pl-6">
               <span class="text-galaxy-cyan font-mono opacity-50 text-2xl">“</span>
               {{ desc }}
               <span class="text-galaxy-cyan ml-2 font-mono opacity-50 text-2xl">”</span>
             </blockquote>
-            
-            <p class="text-[10px] md:text-sm uppercase tracking-[0.2em] text-galaxy-text-muted opacity-80 font-mono pt-4 border-t border-white/5">
-              // <span class="text-glow-mid">Currently_working:</span> freelance_projects [Fullstack_Dev]
+
+            <p
+              class="text-[10px] md:text-sm uppercase tracking-[0.2em] text-galaxy-text-muted opacity-80 font-mono pt-4 border-t border-white/5">
+              // <span class="text-glow-mid">Currently_working:</span> intern fullstack developer at Hospital
             </p>
 
             <div class="flex flex-wrap justify-center md:justify-start gap-4">
@@ -72,6 +83,8 @@ const sectionContainer = ref(null);
 const title = ref(null);
 const profileImg = ref(null);
 const textContent = ref(null);
+const topLeftBadge = ref(null);
+const bottomRightBadge = ref(null);
 
 const githubLink = ref('https://github.com/taufiqrhmd');
 const linkedinLink = ref('https://linkedin.com/in/mohamad-taufiq-rahmadi');
@@ -96,7 +109,7 @@ onMounted(() => {
   // 1. Flicker Entrance
   tl.to(sectionContainer.value, { opacity: 1, duration: 0.1, repeat: 2, yoyo: true })
     .to(sectionContainer.value, { opacity: 1, duration: 0.3 })
-    
+
   // 2. Title Slide with Glitch-like ease
   tl.from(title.value, {
     x: -20,
@@ -122,6 +135,16 @@ onMounted(() => {
     stagger: 0.15,
     ease: "power2.out"
   }, "-=0.7");
+
+  // 5. Animate corner badges
+  tl.from([topLeftBadge.value, bottomRightBadge.value], {
+    opacity: 0,
+    y: (i) => i === 0 ? -10 : 10, // top moves up, bottom moves down
+    x: (i) => i === 0 ? -10 : 10,
+    duration: 0.5,
+    ease: "power2.out",
+    stagger: 0.1
+  }, "-=0.3");
 });
 
 // Fetching Supabase Logic tetap sama
@@ -149,34 +172,13 @@ onMounted(async () => {
   filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
 }
 
-/* 2. Monitor Scanlines */
-.bg-scanlines {
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(0, 0, 0, 0.8) 51%
-  );
-  background-size: 100% 4px;
-}
-
-/* 3. Button Sci-Fi Glow */
-.btn-sci-fi {
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  border-color: rgba(79, 195, 247, 0.3) !important;
-  color: #e6f0ff !important;
-}
-
-.btn-sci-fi:hover {
-  background: rgba(79, 195, 247, 0.1) !important;
-  box-shadow: 
-    0 0 10px rgba(79, 195, 247, 0.4),
-    0 0 20px rgba(168, 85, 247, 0.2);
-  transform: translateY(-2px) scale(1.02);
-  border-color: #4fc3f7 !important;
-}
-
-blockquote {
-  border-left: 2px solid rgba(168, 85, 247, 0.3);
-  padding-left: 1.5rem;
+.bg-galaxy-bg {
+  background: linear-gradient(145deg, rgba(10, 8, 20, 0.7), rgba(18, 15, 30, 0.9));
+  /* opsional: noise texture */
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 10px 30px -10px rgba(0, 0, 0, 0.6),
+    inset 0 0 20px rgba(79, 195, 247, 0.05),
+    inset 0 0 40px rgba(199, 125, 255, 0.03);
 }
 </style>
