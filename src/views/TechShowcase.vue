@@ -1,6 +1,6 @@
 <template>
   <section ref="showcaseContainer" class="px-4 opacity-0 overflow-hidden">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 pb-12 pt-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10 pb-14 pt-4">
 
       <div ref="textCol" class="w-full md:w-1/2 space-y-4 text-center md:text-left md:pl-6 min-h-[160px] md:h-12">
         <div ref="textContent" class="space-y-4">

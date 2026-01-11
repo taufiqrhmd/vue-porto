@@ -9,11 +9,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // Ikon yang dibutuhkan
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons' // ✅ `faLinkedinIn`, bukan `faLinkedin`
 
 // Daftarkan ikon ke library
-library.add(faDownload, faGithub, faLinkedinIn, faInstagram)
+library.add(faDownload, faGithub, faLinkedinIn, faInstagram, faPaperPlane)
 
 // 🔹 Buat instance app DULU
 const app = createApp(App)

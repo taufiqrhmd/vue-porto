@@ -14,7 +14,8 @@
             class="absolute -top-8 md:-top-12 left-0 w-full overflow-hidden h-8 md:h-12 pointer-events-none"
             style="opacity: 0;">
 
-            <div class="scan-line absolute left-0 w-2/6 h-[1px] bg-gradient-to-r from-galaxy-cyan via-galaxy-cyan to-transparent z-50 shadow-[0_0_15px_rgba(255,0,255,0.8)]">
+            <div
+              class="scan-line absolute left-0 w-2/6 h-[1px] bg-gradient-to-r from-galaxy-cyan via-galaxy-cyan to-transparent z-50 shadow-[0_0_15px_rgba(255,0,255,0.8)]">
             </div>
 
             <div class="relative h-full w-full font-sciFi">
@@ -33,8 +34,15 @@
             </h1>
 
             <h1 ref="filledTitle"
-              class="filled-text absolute top-0 left-0 w-full text-[15vw] md:text-[12vw] font-black uppercase leading-[0.9] text-galaxy-cyan pointer-events-none"
-              style="clip-path: circle(0% at 50% 50%);">
+              class="filled-text absolute top-0 left-0 w-full text-[15vw] md:text-[12vw] font-black uppercase leading-[0.9] pointer-events-none"
+              style="
+    background: linear-gradient(135deg, #00f7ff, #8a2be2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: blur(0.5px) drop-shadow(0 0 8px rgba(0, 247, 255, 0.6));
+    clip-path: circle(0% at 50% 50%);
+  ">
               TAUFIQ DEV
             </h1>
           </div>
@@ -49,7 +57,7 @@ import { onMounted, ref, onBeforeUnmount } from 'vue';
 import { gsap } from 'gsap';
 
 // Data
-const words = ["Web Developer.", "Mobile Developer.", "Frontend Engineer.", "Tech Enthusiast."];
+const words = ["Web Developer.", "Mobile Developer.", "Frontend Engineer.", "UI/UX Designer."];
 
 // Refs
 const heroImg = ref(null);
@@ -111,11 +119,11 @@ const startRoleTextAnimation = () => {
 
   wordsEls.forEach((wordEl, i) => {
     const nextWordEl = wordsEls[(i + 1) % wordsEls.length];
-    
+
     heroTimeline
       // 1. Gerakan Scan Line menyapu kebawah sebelum teks ganti
       .to(scanLine, { top: "100%", duration: 0.7, ease: "power2.inOut" }, "+=2")
-      
+
       // 2. Teks lama keluar dengan efek miring (skew)
       .to(wordEl, {
         yPercent: 100,
@@ -138,7 +146,7 @@ const startRoleTextAnimation = () => {
         },
         "<0.1"
       )
-      
+
       // 4. Scan Line balik ke atas dengan cepat untuk persiapan berikutnya
       .to(scanLine, { top: "0%", duration: 0.4, ease: "power2.out" });
   });
@@ -193,12 +201,29 @@ section {
 }
 
 @keyframes flicker {
-  0% { opacity: 0.9; }
-  5% { opacity: 0.5; }
-  10% { opacity: 0.9; }
-  15% { opacity: 0.3; }
-  20% { opacity: 0.9; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.9;
+  }
+
+  5% {
+    opacity: 0.5;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  15% {
+    opacity: 0.3;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .font-sciFi {

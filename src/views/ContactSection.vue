@@ -12,82 +12,90 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div class="contact-info space-y-12">
-          <div class="brand-info">
-            <span class="text-3xl font-bold tracking-tighter italic">T<span
-                class="text-galaxy-blue underline">-PROGRAMMER</span></span>
-            <p class="text-galaxy-text opacity-80 mt-2 font-light text-lg">Building meaningful and impactful digital experiences</p>
-          </div>
-
-          <div class="space-y-6">
-            <div class="flex items-center space-x-4 group">
-              <div
-                class="p-4 bg-gray-900 rounded-2xl border border-gray-800 group-hover:border-blue-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <p class="font-heading text-sm text-gray-500 uppercase tracking-widest">Email</p>
-                <p class="font-sans text-xl font-medium">taufiqrhmd@gmail.com</p>
-              </div>
-            </div>
-
-            <div class="flex items-center space-x-4 group">
-              <div
-                class="p-4 bg-gray-900 rounded-2xl border border-gray-800 group-hover:border-purple-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-              </div>
-              <div>
-                <p class="font-heading text-sm text-gray-500 uppercase tracking-widest">Location</p>
-                <p class="font-sans text-xl font-medium">Jawa Timur, Indonesia</p>
-              </div>
+        <div class="contact-info space-y-8">
+          <div class="mb-4">
+            <p class="font-mono text-md text-galaxy-text opacity-90">
+              👋 I'm all ears.
+              <span class="text-galaxy-cyan font-medium">Drop a message</span> —
+              let’s turn your vision into code.
+            </p>
+            <div class="mt-3 h-px w-28 bg-gradient-to-r from-galaxy-cyan via-galaxy-cyan to-transparent opacity-50">
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-3">
-            <BaseButton v-if="githubLink" color="outline" size="sm" :icon="['fab', 'github']"
+          <!-- Email -->
+          <div class="flex items-start space-x-4 group">
+            <div
+              class="p-3.5 bg-gray-900/60 rounded-xl border border-gray-800 group-hover:border-galaxy-cyan transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-galaxy-cyan" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-mono text-xs uppercase tracking-widest text-galaxy-text-muted">Email</p>
+              <p class="font-sans text-lg font-medium">
+                taufiqrhmd@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="flex items-start space-x-4 group">
+            <div
+              class="p-3.5 bg-gray-900/60 rounded-xl border border-gray-800 group-hover:border-galaxy-magenta transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-galaxy-magenta" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-mono text-xs uppercase tracking-widest text-galaxy-text-muted">Location</p>
+              <p class="font-sans text-lg font-medium">Jawa Timur, Indonesia</p>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="pt-2 flex flex-wrap gap-3">
+            <BaseButton v-if="githubLink" class="btn-sci-fi" color="outline" size="sm" :icon="['fab', 'github']"
               @click="(e) => { openLink(githubLink); e.currentTarget.blur(); }">
               GitHub
             </BaseButton>
 
-            <BaseButton v-if="linkedinLink" color="outline" size="sm" :icon="['fab', 'linkedin-in']"
+            <BaseButton v-if="linkedinLink" class="btn-sci-fi" color="outline" size="sm" :icon="['fab', 'linkedin-in']"
               @click="(e) => { openLink(linkedinLink); e.currentTarget.blur(); }">
               LinkedIn
             </BaseButton>
 
-            <BaseButton v-if="instagramLink" color="outline" size="sm" :icon="['fab', 'instagram']"
+            <BaseButton v-if="instagramLink" class="btn-sci-fi" color="outline" size="sm" :icon="['fab', 'instagram']"
               @click="(e) => { openLink(instagramLink); e.currentTarget.blur(); }">
               Instagram
             </BaseButton>
           </div>
         </div>
 
-        <div class="contact-form-container">
-          <form @submit.prevent="handleSendMessage"
-            class="bg-gray-900/40 p-10 rounded-3xl border border-gray-800 backdrop-blur-xl shadow-2xl">
+        <div class="contact-form-container z-10">
+          <form @submit.prevent="sendViaWhatsApp"
+            class="bg-gray-900/40 p-10 rounded-3xl border border-gray-800 backdrop-blur-lg shadow-2xl">
             <div class="space-y-5">
               <div class="relative">
                 <input v-model="formData.name" type="text" placeholder="Your Name" required
-                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600" />
+                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-galaxy-cyan transition-all placeholder:text-gray-600" />
               </div>
               <div class="relative">
                 <input v-model="formData.email" type="email" placeholder="Email" required
-                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600" />
+                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-galaxy-cyan transition-all placeholder:text-gray-600" />
               </div>
               <div class="relative">
                 <textarea v-model="formData.message" placeholder="Your Message" rows="4" required
-                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600"></textarea>
+                  class="w-full bg-black/50 border border-gray-700 rounded-xl py-4 px-5 focus:outline-none focus:border-galaxy-cyan transition-all placeholder:text-gray-600"></textarea>
               </div>
 
-              <BaseButton color="outline" size="lg" class="w-full py-4 rounded-xl" :loading="isSending">
-                Send
+              <BaseButton :icon="['fas', 'paper-plane']" color="outline" size="lg" class="w-full py-4 rounded-xl"
+                :loading="isSending">
+                Send via WhatsApp
               </BaseButton>
             </div>
           </form>
@@ -96,11 +104,11 @@
     </div>
   </section>
 
-  <footer class="bg-black py-8 border-t border-gray-900">
+  <div class="max-w-7xl mx-auto px-4 border-t border-gray-700 py-6">
     <div class="text-center text-gray-600 text-sm tracking-widest uppercase">
       &copy; 2026 T-Programmer. Crafting with Passion.
     </div>
-  </footer>
+  </div>
 </template>
 
 <script setup>
@@ -156,18 +164,30 @@ onMounted(async () => {
     .from(".contact-form-container", { x: 50, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.8")
 });
 
-const handleSendMessage = async () => {
+const sendViaWhatsApp = () => {
   isSending.value = true;
-  try {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    formData.name = '';
-    formData.email = '';
-    formData.message = '';
-    alert('Terima kasih! Pesan Anda telah berhasil terkirim.');
-  } catch (error) {
-    alert('Maaf, terjadi kesalahan.');
-  } finally {
-    isSending.value = false;
-  }
+
+  // Format pesan
+  const message = `
+Hello, I'm ${formData.name}.
+Email: ${formData.email}
+
+Message:
+${formData.message}
+  `.trim();
+
+  // Encode untuk URL
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/6287841656134?text=${encodedMessage}`;
+
+  // Buka WhatsApp
+  window.open(whatsappUrl, '_blank');
+
+  // Reset form setelah dikirim
+  formData.name = '';
+  formData.email = '';
+  formData.message = '';
+
+  isSending.value = false;
 };
 </script>
