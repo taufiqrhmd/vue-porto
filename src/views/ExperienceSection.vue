@@ -15,16 +15,12 @@
             </div>
 
             <div v-else class="relative" ref="timelineContainer">
-                <!-- Vertical line (desktop) -->
-                <div
-                    class="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500/10 via-purple-500/10 to-transparent rounded-full z-10">
+                <div class="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500/10 via-purple-500/10 to-transparent rounded-full z-10">
                 </div>
 
-                <!-- Light beam (desktop) -->
                 <div ref="lightBeam"
                     class="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-15 opacity-0 lightbeam"></div>
 
-                <!-- Experience items -->
                 <div v-for="(exp, index) in experiences" :key="exp.id" :ref="el => setItemContainerRef(el, index)"
                     class="relative flex flex-col md:flex-row items-center mb-12 md:mb-16"
                     :class="index % 2 === 0 ? 'md:flex-row-reverse' : ''">
@@ -197,7 +193,7 @@ function initAnimations() {
         // === 1. Card & Dot muncul BERSAMAAN (tanpa delay) ===
         tl.fromTo(
             card,
-            { opacity: 0, y: 20},
+            { opacity: 0, y: 20 },
             {
                 opacity: 1,
                 y: 0,
