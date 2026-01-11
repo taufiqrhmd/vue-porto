@@ -57,7 +57,6 @@
             </div>
           </div>
 
-          <!-- Social Links -->
           <div class="pt-2 flex flex-wrap gap-3">
             <BaseButton v-if="githubLink" class="btn-sci-fi" color="outline" size="sm" :icon="['fab', 'github']"
               @click="(e) => { openLink(githubLink); e.currentTarget.blur(); }">
@@ -167,7 +166,6 @@ onMounted(async () => {
 const sendViaWhatsApp = () => {
   isSending.value = true;
 
-  // Format pesan
   const message = `
 Hello, I'm ${formData.name}.
 Email: ${formData.email}
@@ -176,14 +174,12 @@ Message:
 ${formData.message}
   `.trim();
 
-  // Encode untuk URL
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/6287841656134?text=${encodedMessage}`;
 
   // Buka WhatsApp
   window.open(whatsappUrl, '_blank');
 
-  // Reset form setelah dikirim
   formData.name = '';
   formData.email = '';
   formData.message = '';

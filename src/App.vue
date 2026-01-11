@@ -44,12 +44,14 @@
       <div
         class="absolute inset-0 rounded-full border-2 border-transparent border-t-glow-start/60 border-l-glow-start/60 animate-spin-slow">
       </div>
-      <div class="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-galaxy-darker/90 backdrop-blur-xl transition-all duration-300 group-hover:scale-110">
+      <div
+        class="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-galaxy-darker/90 backdrop-blur-xl transition-all duration-300 group-hover:scale-110">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           class="w-5 h-5 text-white transition-transform duration-300 group-hover:-translate-y-1">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
         </svg>
-        <div class="absolute bottom-2 w-4 h-[1px] bg-glow-start opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="absolute bottom-2 w-4 h-[1px] bg-glow-start opacity-0 group-hover:opacity-100 transition-opacity">
+        </div>
       </div>
       <span
         class="absolute right-16 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 text-[10px] font-sciFi tracking-[0.2em] text-galaxy-text whitespace-nowrap bg-galaxy-darker/40 px-2 py-1 backdrop-blur-sm border-r-2 border-glow-start">
@@ -195,8 +197,13 @@ onUnmounted(() => {
 <style scoped>
 /* Tambahkan animasi twinkle untuk bintang */
 @keyframes twinkle {
-  0% { opacity: 0.3; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .scroll-text {
@@ -204,10 +211,13 @@ onUnmounted(() => {
 }
 
 @keyframes pulseText {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
     text-shadow: 0 0 0px rgba(var(--glow-start-rgb), 0);
   }
+
   50% {
     opacity: 1;
     text-shadow: 0 0 8px rgba(var(--glow-start-rgb), 0.6);
@@ -231,7 +241,12 @@ onUnmounted(() => {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
