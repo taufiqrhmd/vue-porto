@@ -6,12 +6,14 @@
       </Transition>
     </Teleport>
 
-    <div id="projects" ref="scrollSection" class="flex items-start min-h-screen pt-16 md:pt-[92px] z-10">
+    <div id="projects" ref="scrollSection" class="flex items-start min-h-screen pt-16 md:pt-[90px] z-10">
       <div class="w-full">
         <SectionTitle 
         ref="projectHeading" 
           text="Featured Projects" 
-          class="mb-6 md:mb-10 text-4xl md:text-5xl lg:text-6xl opacity-0 translate-y-10 block text-center"
+          size="md"
+          center
+          class="mb-6 md:mb-8 opacity-0 translate-y-10 block"
         />
 
         <div v-if="!isLoading" ref="carouselWrapper" class="flex flex-nowrap gap-6 md:gap-10 px-[10vw]">
