@@ -15,7 +15,7 @@
 
       <div class="flex flex-col items-center md:items-start gap-6 md:gap-8 max-w-7xl mx-auto relative z-20">
         <div class="flex-shrink-0 w-full text-center md:text-left">
-          <SectionTitle ref="titleRef" text="/ About" />
+          <SectionTitle ref="titleRef" text="/ About" size="lg" left />
         </div>
 
         <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12 max-w-7xl px-0 md:px-10 mx-auto">

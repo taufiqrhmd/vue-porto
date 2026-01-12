@@ -1,8 +1,8 @@
 <template>
-  <section id="contact" class="py-20 px-6 bg-galaxy-dark overflow-hidden">
-    <div class="max-w-7xl mx-auto z-10">
+  <section id="contact" class="py-16 px-6 bg-galaxy-dark overflow-hidden">
+    <div class="max-w-7xl mx-auto z-20">
       <div class="contact-header text-center mb-16">
-        <SectionTitle text="Let's Talk." class="text-4xl md:5xl lg:text-7xl" />
+        <SectionTitle text="Let's Talk." size="lg" center />
         <p class="text-white/60 text-lg max-w-2xl mx-auto font-sans mt-2">
           Have an exciting idea? Let's make it a reality through great collaboration.
         </p>
@@ -41,10 +41,10 @@
           </ContactInfoItem>
 
           <div class="pt-2 flex flex-wrap gap-3">
-            <BaseButton v-if="githubLink" color="outline" size="sm" @click="openLink(githubLink)">GitHub</BaseButton>
-            <BaseButton v-if="linkedinLink" color="outline" size="sm" @click="openLink(linkedinLink)">LinkedIn
+            <BaseButton v-if="githubLink" color="outline" size="sm" :icon="['fab', 'github']" @click="openLink(githubLink)">GitHub</BaseButton>
+            <BaseButton v-if="linkedinLink" color="outline" size="sm" :icon="['fab', 'linkedin-in']" @click="openLink(linkedinLink)">LinkedIn
             </BaseButton>
-            <BaseButton v-if="instagramLink" color="outline" size="sm" @click="openLink(instagramLink)">Instagram
+            <BaseButton v-if="instagramLink" color="outline" size="sm" :icon="['fab', 'instagram']" @click="openLink(instagramLink)">Instagram
             </BaseButton>
           </div>
         </div>
